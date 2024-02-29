@@ -11,4 +11,4 @@ jobs:
         env:
           API_URL: ${{ secrets.API_URL }}
         run: |
-          curl -X GET $API_URLhello/github-actions
+          curl -X GET "${API_URL%/}/hello/github-actions"
