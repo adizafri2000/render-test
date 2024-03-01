@@ -14,4 +14,10 @@ jobs:
           API_URL: ${{ secrets.API_URL }}
         run: |
           response=$(curl -sSL -X GET "${API_URL%/}/hello/github-actions")
-          echo "API Response: $response"
+          
+          if echo "$response" | jq -e '.message' > /dev/null; then
+            echo "The 'message' field exists in the JSON response."
+          else
+            echo "The 'message' field does not exist in the JSON response."
+            exit 1
+          fi
