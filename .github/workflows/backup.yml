@@ -3,12 +3,21 @@ name: Render Web Service keep-alive backup
 on:
   schedule:
     - cron: '*/11 * * * *'
+
 jobs:
   call_api:
     runs-on: ubuntu-latest
+
     steps:
       - name: Call API
         env:
           API_URL: ${{ secrets.API_URL }}
         run: |
-          curl -X GET "${API_URL%/}/hello/github-actions-backup-1"
+          response=$(curl -sSL -X GET "${API_URL%/}/hello/github-actions-backup-1")
+          
+          if echo "$response" | jq -e '.message' > /dev/null; then
+            echo "The 'message' field exists in the JSON response."
+          else
+            echo "The 'message' field does not exist in the JSON response."
+            exit 1
+          fi
