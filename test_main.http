@@ -1,3 +1,7 @@
+GET http://localhost:80/api/item?id=99
+Accept: application/json
+
+###
 # Test your FastAPI endpoints
 
 GET http://127.0.0.1:8000/
@@ -5,7 +9,8 @@ Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/hello/User
+GET https://render-test-1bs0.onrender.com/hello/John
 Accept: application/json
 
 ###
+
